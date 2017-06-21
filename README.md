@@ -1,4 +1,4 @@
-# Java for Load Testers Training
+# Java for Load Testers Training #jet-infosystems
 40 hrs.
 
 # Objectives
