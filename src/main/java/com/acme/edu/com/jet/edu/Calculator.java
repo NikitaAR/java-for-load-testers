@@ -44,22 +44,19 @@ public class Calculator {
 
 class CalculatorApp {
     public static void main(String[] args) {
-        // add, sub
+        
         System.out.println(Calculator.add(3, 1));
         System.out.println(Calculator.sub(4, 2));
 
         Calculator.addMem();
 
-        //mul, div
         System.out.println(Calculator.mul(2, 3));
         System.out.println(Calculator.div(6, 6));
 
-        //mem
         System.out.println(Calculator.showMem());
         Calculator.clearMem();
         System.out.println(Calculator.showMem());
 
-        //state
         Calculator.mul(5, 5);
         System.out.println("last state = " + Calculator.showState());
 
