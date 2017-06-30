@@ -30,7 +30,7 @@ public class Calculator {
 
     public static double div(double a, double b) {
         if (b == 0){
-            state = 10;
+            state = 0;
         } else {
             double result = getValidatedInterval(a / b);
             state = result;
@@ -74,6 +74,7 @@ class CalculatorApp {
         String command = "";
         String arg1 = "";
         String arg2 = "";
+        int logCounter = 0;
         int position = -1;
         for (String current : args){
             switch (++position){
@@ -85,28 +86,32 @@ class CalculatorApp {
                     position = -1;
                 } break;
             }
-
+            logCounter++;
         }
     }
 
     private static void doCalculate(String command, double arg1, double arg2) {
         switch (command) {
             case "add": {
-                System.out.println(add(arg1, arg2));
+                log(command, arg1, arg2, add(arg1, arg2));
             } break;
             case "sub": {
-                System.out.println(sub(arg1, arg2));
+                log(command, arg1, arg2, sub(arg1, arg2));
             } break;
             case "mul": {
-                System.out.println(mul(arg1, arg2));
+                log(command, arg1, arg2, mul(arg1, arg2));
             } break;
             case "div": {
-                System.out.println(div(arg1, arg2));
+                log(command, arg1, arg2, div(arg1, arg2));
             } break;
 
             default: {
                 System.out.println("done");
             } break;
         }
+    }
+
+    private static void log(String command, double arg1, double arg2, double result) {
+        System.out.println(arg1+ " " + command + " " + arg2 + " = " + result);
     }
 }
