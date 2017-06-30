@@ -1,47 +1,24 @@
 package com.acme.edu.com.jet.edu;
 
 import static com.acme.edu.com.jet.edu.Calculator.*;
+import static java.lang.Double.*;
 
 /**
  * Class Calculator for Int and Double types, values from -10 to 10
  */
 public class Calculator {
     private static double state = 0;
-    private static double mem = 0;
-
-     public static double add(int a, int b) {
-        state = a + b;
-        state = getValidatedInterval(state);
-        return state;
-    }
-
-    public static double sub(int a, int b) {
-        state = a - b;
-        state = getValidatedInterval(state);
-        return state;
-    }
-
-    public static double mul(int a, int b) {
-        state = a * b;
-        state = getValidatedInterval(state);
-        return state;
-    }
-
-    public static double div(int a, int b) {
-        state = a / b;
-        state = getValidatedInterval(state);
-        return state;
-    }
+    private static double memory = 0;
 
     public static double add(double a, double b) {
-        state = a + b;
-        state = getValidatedInterval(state);
+        double result = getValidatedInterval(a + b);
+        state = result;
         return state;
     }
 
     public static double sub(double a, double b) {
-        state = a - b;
-        state = getValidatedInterval(state);
+        double result = getValidatedInterval(a - b);
+        state = result;
         return state;
     }
 
@@ -52,19 +29,15 @@ public class Calculator {
     }
 
     public static double div(double a, double b) {
-        state = a / b;
-        state = getValidatedInterval(state);
+        if (b == 0){
+            state = 10;
+        } else {
+            double result = getValidatedInterval(a / b);
+            state = result;
+        }
         return state;
     }
 
-    public static double absolute(int a){
-        if(a < 0){
-            a = -a;
-        }
-        state = a;
-        getValidatedInterval(state);
-        return state;
-    }
     public static double absolute(double a){
         if(a < 0){
             a = -a;
@@ -81,52 +54,59 @@ public class Calculator {
         return value;
     }
 
-    public static void addMem() {
-        mem = mem + state;
+    public static void addToMemory() {
+        memory = memory + state;
     }
 
     public static void clearMemory() {
-        mem = 0;
+        memory = 0;
     }
     public static double getState(){
         return state;
     }
-    public static double getMem(){
-        return mem;
+    public static double getMemory(){
+        return memory;
     }
 }
 
 class CalculatorApp {
     public static void main(String[] args) {
+        String command = "";
+        String arg1 = "";
+        String arg2 = "";
+        int position = -1;
+        for (String current : args){
+            switch (++position){
+                case 0: command = current; break;
+                case 1: arg1 = current; break;
+                case 2: {
+                    arg2 = current;
+                    doCalculate(command, parseDouble(arg1), parseDouble(arg2));
+                    position = -1;
+                } break;
+            }
 
-        System.out.println(add(3, 1));
-        System.out.println(sub(4, 2));
-
-        addMem();
-
-        System.out.println(mul(2, 3));
-        System.out.println(div(6, 6));
-
-        System.out.println(getMem());
-        clearMemory();
-        System.out.println(getMem());
-
-        mul(5, 5);
-        System.out.println("last state = " + getState());
-
-
-        System.out.println(add(1.1, 1));
-        System.out.println(sub(4, 2.1));
-
-        System.out.println(mul(2.5, 6));
-        System.out.println(div(-3, 6));
-
-        System.out.println(mul(-2.5, 6));
-
-        System.out.println(absolute(-5));
-
-
-
+        }
     }
 
+    private static void doCalculate(String command, double arg1, double arg2) {
+        switch (command) {
+            case "add": {
+                System.out.println(add(arg1, arg2));
+            } break;
+            case "sub": {
+                System.out.println(sub(arg1, arg2));
+            } break;
+            case "mul": {
+                System.out.println(mul(arg1, arg2));
+            } break;
+            case "div": {
+                System.out.println(div(arg1, arg2));
+            } break;
+
+            default: {
+                System.out.println("done");
+            } break;
+        }
+    }
 }
