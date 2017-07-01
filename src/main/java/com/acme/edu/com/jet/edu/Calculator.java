@@ -6,8 +6,21 @@ package com.acme.edu.com.jet.edu;
 public class Calculator {
     private double state = 0;
     private double memory = 0;
-    public int id = 0;
-    OperationLog log = new OperationLog();
+
+    private int id = 0;
+    public void setId(int inputId){
+        id = inputId;
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    private CalculatorLogger log;
+
+    public void setLog(CalculatorLogger log){
+        this.log = log;
+    }
 
     public double add(double a, double b) {
         double result = getValidatedInterval(a + b);

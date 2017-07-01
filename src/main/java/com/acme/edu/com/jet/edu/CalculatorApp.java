@@ -2,12 +2,15 @@ package com.acme.edu.com.jet.edu;
 
 import static java.lang.Double.parseDouble;
 
+
 public class CalculatorApp {
     public static void main(String[] args) {
-        Calculator Calc1 = new Calculator();
-        Calc1.id = 1;
-        Calculator Calc2 = new Calculator();
-        Calc2.id = 2;
+        Calculator calc1 = new Calculator();
+        calc1.setId(1);
+        calc1.setLog(new StubLogger());
+        Calculator calc2 = new Calculator();
+        calc2.setId(2);
+        calc2.setLog(new StringBuilderCalculatorLogger());
 
         String command = "";
         String arg1 = "";
@@ -22,20 +25,20 @@ public class CalculatorApp {
                 case 2: arg2 = current; break;
                 case 3:{
                     if (Integer.parseInt(current) == 1) {
-                        Calc1.doCalculate(command, parseDouble(arg1), parseDouble(arg2));
+                        calc1.doCalculate(command, parseDouble(arg1), parseDouble(arg2));
                         position = -1; break;
                     } else if (Integer.parseInt(current) == 2){
-                        Calc2.doCalculate(command, parseDouble(arg1), parseDouble(arg2));
+                        calc2.doCalculate(command, parseDouble(arg1), parseDouble(arg2));
                         position = -1; break;
                     }
                 }
             }
         }
 
-        for (String logOutput : Calc1.getLog()){
+        for (String logOutput : calc1.getLog()){
             System.out.println(logOutput);
         }
-        for (String logOutput : Calc2.getLog()){
+        for (String logOutput : calc2.getLog()){
             System.out.println(logOutput);
         }
     }
