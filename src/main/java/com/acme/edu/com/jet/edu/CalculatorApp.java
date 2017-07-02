@@ -5,12 +5,11 @@ import static java.lang.Double.parseDouble;
 
 public class CalculatorApp {
     public static void main(String[] args) {
-        Calculator calc1 = new Calculator();
-        calc1.setId(1);
-        calc1.setLog(new StubLogger());
-        Calculator calc2 = new Calculator();
-        calc2.setId(2);
-        calc2.setLog(new StringBuilderCalculatorLogger());
+        Calculator calc1 = new Calculator(new StubLogger());
+
+        Calculator calc2 = new Calculator(new DecoratingStringBuilderCalculatorLog(
+                new StringBuilder("TEST ENV\n")
+        ));
 
         String command = "";
         String arg1 = "";

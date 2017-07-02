@@ -6,19 +6,9 @@ package com.acme.edu.com.jet.edu;
 public class Calculator {
     private double state = 0;
     private double memory = 0;
-
-    private int id = 0;
-    public void setId(int inputId){
-        id = inputId;
-    }
-
-    public int getId(){
-        return id;
-    }
-
     private CalculatorLogger log;
 
-    public void setLog(CalculatorLogger log){
+    public Calculator(CalculatorLogger log){
         this.log = log;
     }
 
@@ -87,16 +77,16 @@ public class Calculator {
     public void doCalculate(String command, double arg1, double arg2) {
         switch (command) {
             case "add": {
-                log.addToLog(command, arg1, arg2, add(arg1, arg2), id);
+                log.addToLog(command, arg1, arg2, add(arg1, arg2));
             } break;
             case "sub": {
-                log.addToLog(command, arg1, arg2, sub(arg1, arg2), id);
+                log.addToLog(command, arg1, arg2, sub(arg1, arg2));
             } break;
             case "mul": {
-                log.addToLog(command, arg1, arg2, mul(arg1, arg2), id);
+                log.addToLog(command, arg1, arg2, mul(arg1, arg2));
             } break;
             case "div": {
-                log.addToLog(command, arg1, arg2, div(arg1, arg2), id);
+                log.addToLog(command, arg1, arg2, div(arg1, arg2));
             } break;
 
             default: {
